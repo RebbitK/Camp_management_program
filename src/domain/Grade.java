@@ -1,5 +1,5 @@
 package domain;
-import java.util.*;
+import domain.course.CourseType;
 
 public class Grade {
     // 점수 안에 회차, 점수, 등급이 설정되어야한다.
@@ -12,6 +12,7 @@ public class Grade {
     public Grade(int score,CourseType type) {
         this.score = score;
         this.type = type;
+        setRank(score);
 
     }
     public int getScore() {
@@ -25,42 +26,46 @@ public class Grade {
     // 점수를 세팅하는 메서드, 점수가 입력되자마자 등급이 자동으로 설정됨
     public void setScore(int score) {
         this.score = score;
+        setRank(score);
+    }
+
+    private void setRank(int score) {
+        if(type == CourseType.MANDATORY) {
+            rank = mandatoryRank(score);
+            return;
+        }
+
+        rank = optionalRank(score);
     }
 
     public static char mandatoryRank(int score) {
-        char rank;
-
         if(score >=95 && score <=100)
-            rank = 'A';
-        else if(score >=90 && score <=94)
-            rank = 'B';
-        else if(score >=80 && score <=89)
-            rank = 'C';
-        else if(score >=70 && score <=79)
-            rank = 'D';
-        else if(score >=60 && score <=69)
-            rank = 'F';
-        else {
-            rank = 'N';
-        }
-        return rank;
+            return 'A';
+        else if(score >=90)
+            return 'B';
+        else if(score >=80)
+            return 'C';
+        else if(score >=70)
+            return 'D';
+        else if(score >=60)
+            return 'F';
+
+        return 'N';
+
     }
     public static char optionalRank(int score) {
-        char rank;
-
         if(score >=90&& score <=100)
-            rank = 'A';
-        else if(score >=80 && score <=89)
-            rank = 'B';
-        else if(score >=70 && score <=79)
-            rank = 'C';
-        else if(score >=60 && score <=69)
-            rank = 'D';
-        else if(score >=50 && score <=59)
-            rank = 'F';
-        else {
-            rank = 'N';
-        }
-        return rank;
+            return 'A';
+        else if(score >=80)
+            return 'B';
+        else if(score >=70)
+            return 'C';
+        else if(score >=60)
+            return 'D';
+        else if(score >=50)
+            return 'F';
+
+        return 'N';
+
     }
 }

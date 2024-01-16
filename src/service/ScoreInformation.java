@@ -1,11 +1,16 @@
 package service;
 
+import domain.Course;
+import domain.Student;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class ScoreInformation {
 
-    ArrayList<ScoreSystem> list;    //arraylist 생성 (클래스가 배열에 담기게 된다 )
+    ArrayList<Student> list;    //arraylist 생성 (클래스가 배열에 담기게 된다 )
     Scanner sc = new Scanner(System.in);
     private String id, name;
     private int JAVA, SPRING, JPA, MYSQL, DESIGNPATTERN, SPRINGSECURITY, REDIS, MONGODB;
@@ -20,9 +25,9 @@ public class ScoreInformation {
 
             //값 입력 부분
             System.out.println("학번을 입력하세요:");
-            id = sc.next();
+            id = sc.nextLine();
             System.out.println("이름을 입력하세요.:");
-            name = sc.next();
+            name = sc.nextLine();
             System.out.println("JAVA 점수를 입력하세요:");
             JAVA = sc.nextInt();
             System.out.println("SPRING 점수를 입력하세요 :");
@@ -50,7 +55,7 @@ public class ScoreInformation {
         String find;    // 이름 받을 변수
 
         System.out.println("이름을 입력하세요:");
-        find = sc.next();
+        find = sc.nextLine();
 
         for (int h = 0; h < list.size(); h++) {
 
@@ -73,46 +78,58 @@ public class ScoreInformation {
         }
     }
 
-    //수정
-    public void modify() {
-        String modi;
-        System.out.println("성적을 수정할 이름을 입력하세요:");
-        modi = sc.next();
-        int select;
+    //수정본
+    public void check(ArrayList<Student> list) {
+        this.list = list;
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("고유번호는" + list.get(i).getAccountId() + " " + "이고," + "이름은" + list.get(i).getName());
+        }
 
-        for (int j = 0; j < list.size(); j++) {
-            if (modi.equals(modi.equals(list.get(j).getName()))) {
-                System.out.println("수정할 부분을 선택해주세요 1.일괄수정 2.이름 3.JAVA 4.SPRING 5.JPA 6.MYSQL 7.DESIGNPATTERN 8.SPRINGSECURITY 9.REDIS 10.MONGODB:");
-                select = sc.nextInt();
+        System.out.println("성적을 수정할 학생의 번호를 입력해주세요:");
+        String check = sc.nextLine();
+        int accountNum = Integer.parseInt(check);
+        Student findStudent = checkPerson(accountNum);
+        checkCourse(findStudent);
+    }
 
-                if (select == 1) {
-                    System.out.println("변경할 이름을 입력하세요:");
-                    list.get(j).setName(sc.next());
-                    System.out.println("변경할 JAVA점수를입력하세요:");
-                    list.get(j).setJAVA(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 SPRING점수를 입력하세요:");
-                    list.get(j).setSPRING(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 JPA점수를 입력하세요:");
-                    list.get(j).setJPA(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 MYSQL점수를 입력하세요:");
-                    list.get(j).setMYSQL(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 DESIGNPATTERN점수를입력하세요:");
-                    list.get(j).setDESIGNPATTERN(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 SPRINGSECURITY점수를 입력하세요:");
-                    list.get(j).setSPRINGSECURITY(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 REDIS점수를 입력하세요:");
-                    list.get(j).setREDIS(Integer.parseInt(sc.next()));
-                    System.out.println("변경할 MONGODB점수를 입력하세요:");
-                    list.get(j).setMONGODB(Integer.parseInt(sc.next()));
-
-                    System.out.println("수정이 완료되었습니다.\n");
-                    System.out.println("이름\tJAVA\tSPRING\tJPA\tMYSQL\tDESIGNPATTERN\tSPRINGSECURITY\tREDIS\tMONGODB");
-                    System.out.println(
-                            list.get(j).getName() + "\t" + list.get(j).getJAVA() + "\t" + list.get(j).getSPRING() + "\t" + list.get(j).getJPA() + "\t" + list.get(j).getMYSQL() + "\t" +
-                                    list.get(j).getDESIGNPATTERN() + "\t" + list.get(j).getSPRINGSECURITY() + "\t" + list.get(j).getREDIS() + "\t" + list.get(j).MONGODB);
-                }
-                break;
+    public Student checkPerson(int select) {
+        for(int i = 0; i<list.size(); i++) {
+            if(select == list.get(i).getAccountId()) {
+                return list.get(i);
             }
         }
+        return null;
     }
+
+    public void checkCourse(Student findStudent) {
+        findStudent.getMyCourse(i);
+        List<Course> course = findStudent.getMyCourse();
+        for (int i = 0; i < course.size(); i++) {
+            System.out.println("학생이 수강하고 있는 과목은" + course.get(i).getCourseName()+"이고,"+ "코드번호는 "+course.get(i).getIdNumber()+ "입니다.");
+        }
+    }
+    public Student checkSubject(int idNumber) {
+        for(int i = 0; i<course.size(); i++) {
+            if(idNumber == course.get(i).getIdNumber()) {
+                return list.get(i);
+            }
+        }
+        return null;
+    }
+    public void inputCourse(IdNumber idNumber) {
+        idNumber.getIdNumber(i);
+        List<idNumber>idNumber = idNumber.getMyIdNumber();
+
+    }
+
 }
+
+// 고유번호를 가지고 고유번호를 입력해서
+// 고유번호가 있는지 학생의 course를 위처럼 검색해서
+// 있으면 코스타입으로 반환
+
+// 점수를 입력하거나, 수정
+//  public List<Grade> getGrades() 현재는 아무 것도 없다.
+// 여기다가 점수를 넣으면 등급까지 설정하게끔 grade 클래스 안에
+// grade , coursetype 두가지로
+// set 으로

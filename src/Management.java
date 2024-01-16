@@ -69,6 +69,7 @@ public class Management {
                 case 6:
                     System.out.println("수강생의 점수를 입력하시겠습니까?");
                     scoreInformation.insert(); //점수입력
+                    //점수를 모든 과목 전부 입력받는 것이 아니라 원하는 과목의 점수를 회차별로 저장하도록 해주세요!
                     break;
                 default:
                     throw new service.out_of_range();

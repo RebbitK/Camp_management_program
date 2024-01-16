@@ -66,6 +66,8 @@ public class Main {
         ss.add(s1);
         ss.add(s2);
         Avg_calculation avv = new Avg_calculation();
-        avv.avg_screen(ss);
+        Management m = new Management();
+        m.run();
+
     }
 }

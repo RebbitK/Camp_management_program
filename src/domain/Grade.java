@@ -27,6 +27,7 @@ public class Grade {
         this.score = score;
     }
 
+
     public static char mandatoryRank(int score) {
         char rank;
 

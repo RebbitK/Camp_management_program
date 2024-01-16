@@ -12,7 +12,7 @@ public class Student {
         this.accountId = accountId;
         this.name = name;
         this.myCourse = myCourse;
-        status = "Green";
+        status = StudentStatus.GREEN.getStatus();
     }
 
     public long getAccountId() {
@@ -45,5 +45,38 @@ public class Student {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public void redefineStatus() {
+        double total = calculateAvgCourse();
+        measureStatus(total);
+    }
+
+    private void measureStatus(double total) {
+        if(total == 0) {
+            status = StudentStatus.GREEN.getStatus();
+            return;
+        }
+
+        if(total > 70)
+            status = StudentStatus.GREEN.getStatus();
+        else if(total > 40)
+            status = StudentStatus.YELLOW.getStatus();
+        else
+            status = StudentStatus.RED.getStatus();
+    }
+    private double calculateAvgCourse() {
+        int count = 0;
+        double total = 0;
+
+        for(Course course : myCourse) {
+            if(course.avgScore() == 0) continue;
+
+            count++;
+            total += course.avgScore();
+        }
+
+        if(count == 0) return 0;
+
+        return total/count;
     }
 }

@@ -42,5 +42,24 @@ public class Course {
 
     public char getRoundRank(int round){return grades.get(round).getRank();}
 
-    public void setGrades(List<Grade> a){this.grades =a; } //임시추가 없앨것
+    // 시험 본 평균 점수를 반환
+    public double avgScore() {
+        if(grades.isEmpty())
+            return 0;
+
+        return (double)totalScore() / grades.size();
+    }
+
+    public void setGrades(List<Grade> grades){
+        this.grades = grades;
+    }
+    // 시험 본 전체 점수를 반환
+    public int totalScore() {
+        int total = 0;
+
+        for(Grade grade : grades)
+            total += grade.getScore();
+
+        return total;
+    }
 }

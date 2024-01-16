@@ -8,7 +8,7 @@
 **김형우**| 팀장 | https://khwtil.tistory.com/       | https://github.com/RebbitK
 **이병수**| 팀원 | https://velog.io/@gloz0315/posts  | https://github.com/gloz0315
 **진유림**| 팀원 | 1                                 |1
-**최지원**| 팀원 | 1                                 |1
+**최지원**| 팀원 | https://velog.io/@jiwon317/posts  | https://github.com/jiwon317
 **남지훈**| 팀원 | 1                                 |1
 
 
